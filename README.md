@@ -55,7 +55,7 @@ Array
 )
 ```
 
-###Youtube example
+### Youtube example
 
 ```php
 use Sintezi\SnapLink\SnapLink;
