@@ -156,7 +156,7 @@ class AdditionalGeneralParser implements ParserInterface
             'pictures' => [],
         ];
 
-        $file = fopen($this->getLink(), 'r');
+        $file = fopen($this->getLink()->getUrl(), 'r');
 
         $content = '';
         if(!$file) {
@@ -167,8 +167,8 @@ class AdditionalGeneralParser implements ParserInterface
         }
 
         $metaTags = array_merge(
-            get_meta_tags($this->getLink()),
-            $this->loadAdditionalOGMetaTags($this->getLink())
+            get_meta_tags($this->getLink()->getUrl()),
+            $this->loadAdditionalOGMetaTags($this->getLink()->getUrl())
         );
 
         if (array_key_exists('og:title',$metaTags)) {
@@ -184,8 +184,6 @@ class AdditionalGeneralParser implements ParserInterface
             } else {
                 if(count($title[1]) > 0) {
                     $data['title'] = $title[1][0];
-                } else if($linkPreviewData->getTitle() != null) {
-                    $data['title'] = $linkPreviewData->getTitle();
                 }
             }
         }

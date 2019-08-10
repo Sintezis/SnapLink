@@ -8,7 +8,7 @@ A PHP library to easily scrap link preview information from website (url).
 
 ### composer
 
-Run `composer install SnapLink`
+Run `composer require sintezis/snap-link`
 
 
 SnapLink will be installed in vendor/sintezis/snap-link

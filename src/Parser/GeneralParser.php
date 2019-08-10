@@ -159,7 +159,7 @@ class GeneralParser implements ParserInterface
         libxml_use_internal_errors(true);
 
         $doc = new \DOMDocument();
-        $doc->loadHTML($html);
+        $doc->loadHTML('<?xml encoding="utf-8" ?>' . $html);
 
         /** @var \DOMElement $meta */
         foreach ($doc->getElementsByTagName('meta') as $meta) {
