@@ -1,4 +1,6 @@
-SnapLink
+SnapLink 
+
+[![Build Status](https://travis-ci.org/Sintezis/SnapLink.svg?branch=master)](https://travis-ci.org/Sintezis/SnapLink)
 ===========
 
 A PHP library to easily scrap link preview information from website (url).
