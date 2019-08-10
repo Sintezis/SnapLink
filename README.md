@@ -1,5 +1,4 @@
-SnapLink 
-
+#SnapLink 
 [![Build Status](https://travis-ci.org/Sintezis/SnapLink.svg?branch=master)](https://travis-ci.org/Sintezis/SnapLink)
 ===========
 
