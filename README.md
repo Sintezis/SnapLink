@@ -34,7 +34,6 @@ foreach ($parsed as $parserName => $link) {
 }
 ```
 
-
 **Output**
 
 ```
@@ -78,7 +77,6 @@ foreach ($parsed as $parserName => $link) {
     }
 }
 ```
-
 
 **Output**
 
