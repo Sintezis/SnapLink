@@ -67,23 +67,30 @@ class GeneralReader implements ReaderInterface
     {
         $link = $this->getLink();
         $client = $this->getClient();
+        $options =
+            [
+                'on_stats' => function (TransferStats $stats) use (&$effectiveUrl) {
+                    $effectiveUrl = $stats->getEffectiveUri();
+                },
+            ];
+
+        if (strpos($link->getUrl(), 'twitter.com')) {
+            $options['headers']['User-Agent'] = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
+        }
 
         $response = $client->request(
             'GET',
             $link->getUrl(),
-            [
-                'on_stats' => function (TransferStats $stats) use (&$effectiveUrl) {
-                    $effectiveUrl = $stats->getEffectiveUri();
-                }
-            ]
+            $options
         );
+
         $headerContentType = $response->getHeader('content-type');
         $contentType = '';
 
         if (is_array($headerContentType) && count($headerContentType) > 0) {
             $contentType = current(explode(';', current($headerContentType)));
         }
-
+        
         $link->setContent((string)$response->getBody())
             ->setContentType($contentType)
             ->setRealUrl($effectiveUrl);
