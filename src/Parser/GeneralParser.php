@@ -163,25 +163,33 @@ class GeneralParser implements ParserInterface
 
         /** @var \DOMElement $meta */
         foreach ($doc->getElementsByTagName('meta') as $meta) {
-            if ($meta->getAttribute('itemprop') === 'image') {
-                $data['image'] = $meta->getAttribute('content');
-            } elseif ($meta->getAttribute('property') === 'og:image') {
-                $data['image'] = $meta->getAttribute('content');
-            } elseif ($meta->getAttribute('property') === 'twitter:image') {
-                $data['image'] = $meta->getAttribute('value');
+            if (empty($data['image'])) {
+                if ($meta->getAttribute('itemprop') === 'image') {
+                    $data['image'] = $meta->getAttribute('content');
+                } elseif ($meta->getAttribute('property') === 'og:image') {
+                    $data['image'] = $meta->getAttribute('content');
+                } elseif ($meta->getAttribute('property') === 'twitter:image') {
+                    $data['image'] = $meta->getAttribute('content');
+                }
             }
-            if ($meta->getAttribute('itemprop') === 'name') {
-                $data['title'] = $meta->getAttribute('content');
-            } elseif ($meta->getAttribute('property') === 'og:title') {
-                $data['title'] = $meta->getAttribute('content');
-            } elseif ($meta->getAttribute('property') === 'twitter:title') {
-                $data['title'] = $meta->getAttribute('value');
+
+            if (empty($data['title'])) {
+                if ($meta->getAttribute('itemprop') === 'name') {
+                    $data['title'] = $meta->getAttribute('content');
+                } elseif ($meta->getAttribute('property') === 'og:title') {
+                    $data['title'] = $meta->getAttribute('content');
+                } elseif ($meta->getAttribute('property') === 'twitter:title') {
+                    $data['title'] = $meta->getAttribute('content');
+                }
             }
-            if ($meta->getAttribute('itemprop') === 'description') {
-                $data['title'] = $meta->getAttribute('content');
-            }
-            if ($meta->getAttribute('property') === 'og:description') {
-                $data['description'] = $meta->getAttribute('content');
+
+            if (empty($data['description'])) {
+                if ($meta->getAttribute('itemprop') === 'description') {
+                    $data['title'] = $meta->getAttribute('content');
+                }
+                if ($meta->getAttribute('property') === 'og:description') {
+                    $data['description'] = $meta->getAttribute('content');
+                }
             }
         }
 
@@ -203,7 +211,6 @@ class GeneralParser implements ParserInterface
         foreach ($doc->getElementsByTagName('img') as $img) {
             $data['pictures'][] = $img->getAttribute('src');
         }
-        
         return $data;
     }
 

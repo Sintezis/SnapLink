@@ -80,8 +80,77 @@ class SnapLinkTest extends \PHPUnit\Framework\TestCase
 
     public function testYoutube()
     {
-        $snapLink = new SnapLink('https://www.youtube.com/watch?v=C0DPdy98e4c');
-        $parsedLink = current($snapLink->getParsed());
+        $snapLink = new SnapLink('https://www.youtube.com/watch?v=dwpBHCZ9DBM');
+        $parsed = $snapLink->getParsed();
+        foreach ($parsed as $parserName => $link) {
+            self::assertNotEmpty($link->getUrl());
+            self::assertNotEmpty($link->getTitle());
+            self::assertNotEmpty($link->getDescription());
+            self::assertNotEmpty($link->getImage());
+            self::assertNotEmpty($link->getEmbedCode());
+            self::assertNotEmpty($parserName);
+        }
+        $parsedLink = current($parsed);
         self::assertInstanceOf('Sintezis\SnapLink\Model\VideoLink', $parsedLink);
+    }
+
+    public function testFacebook()
+    {
+        $snapLink = new SnapLink('https://www.facebook.com/vgdanas/posts/1608723339299866');
+        $parsed = $snapLink->getParsed();
+        foreach ($parsed as $parserName => $link) {
+            self::assertNotEmpty($link->getUrl());
+            self::assertNotEmpty($link->getTitle());
+            self::assertNotEmpty($link->getDescription());
+            self::assertNotEmpty($link->getImage());
+            self::assertNotEmpty($parserName);
+        }
+
+        self::assertEquals('https://www.facebook.com/vgdanas/posts/1608723339299866', $snapLink->getUrl());
+    }
+
+    public function testSpotify()
+    {
+        $snapLink = new SnapLink('https://open.spotify.com/track/5ScJ1wvDx0yzGcUHa9buEu?si=76G--lVxTHi6W3OcBlgmVA');
+        $parsed = $snapLink->getParsed();
+        foreach ($parsed as $parserName => $link) {
+            self::assertNotEmpty($link->getUrl());
+            self::assertNotEmpty($link->getTitle());
+            self::assertNotEmpty($link->getDescription());
+            self::assertNotEmpty($link->getImage());
+            self::assertNotEmpty($parserName);
+        }
+
+        self::assertEquals('https://open.spotify.com/track/5ScJ1wvDx0yzGcUHa9buEu?si=76G--lVxTHi6W3OcBlgmVA', $snapLink->getUrl());
+    }
+
+    public function testReddit()
+    {
+        $snapLink = new SnapLink('https://www.reddit.com/r/gaming/comments/k411lv/i_couldnt_be_more_proud_of_her_after_a_lot_of/');
+        $parsed = $snapLink->getParsed();
+        foreach ($parsed as $parserName => $link) {
+            self::assertNotEmpty($link->getUrl());
+            self::assertNotEmpty($link->getTitle());
+            self::assertNotEmpty($link->getDescription());
+            self::assertNotEmpty($link->getImage());
+            self::assertNotEmpty($parserName);
+        }
+
+        self::assertEquals('https://www.reddit.com/r/gaming/comments/k411lv/i_couldnt_be_more_proud_of_her_after_a_lot_of/', $snapLink->getUrl());
+    }
+
+    public function testTwitter()
+    {
+        $snapLink = new SnapLink('https://twitter.com/NBA/status/1335644099739791363');
+        $parsed = $snapLink->getParsed();
+        foreach ($parsed as $parserName => $link) {
+            self::assertNotEmpty($link->getUrl());
+            self::assertNotEmpty($link->getTitle());
+            self::assertNotEmpty($link->getDescription());
+            self::assertNotEmpty($link->getImage());
+            self::assertNotEmpty($parserName);
+        }
+
+        self::assertEquals('https://twitter.com/NBA/status/1335644099739791363', $snapLink->getUrl());
     }
 }
