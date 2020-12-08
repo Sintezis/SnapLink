@@ -163,6 +163,10 @@ class GeneralParser implements ParserInterface
 
         /** @var \DOMElement $meta */
         foreach ($doc->getElementsByTagName('meta') as $meta) {
+            if (!empty($data['image']) && !empty($data['title']) && !empty($data['description'])) {
+                break;
+            }
+
             if (empty($data['image'])) {
                 if ($meta->getAttribute('itemprop') === 'image') {
                     $data['image'] = $meta->getAttribute('content');
