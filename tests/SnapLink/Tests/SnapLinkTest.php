@@ -139,6 +139,21 @@ class SnapLinkTest extends \PHPUnit\Framework\TestCase
         self::assertEquals('https://www.reddit.com/r/gaming/comments/k411lv/i_couldnt_be_more_proud_of_her_after_a_lot_of/', $snapLink->getUrl());
     }
 
+    public function testRandomSite()
+    {
+        $snapLink = new SnapLink('https://techcrunch.com/2020/12/15/what-to-expect-tomorrow-at-tc-sessions-space-2020/');
+        $parsed = $snapLink->getParsed();
+        foreach ($parsed as $parserName => $link) {
+            self::assertNotEmpty($link->getUrl());
+            self::assertNotEmpty($link->getTitle());
+            self::assertNotEmpty($link->getDescription());
+            self::assertNotEmpty($link->getImage());
+            self::assertNotEmpty($parserName);
+        }
+
+        self::assertEquals('https://techcrunch.com/2020/12/15/what-to-expect-tomorrow-at-tc-sessions-space-2020/', $snapLink->getUrl());
+    }
+
     public function testTwitter()
     {
         $snapLink = new SnapLink('https://twitter.com/NBA/status/1335644099739791363');
