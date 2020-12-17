@@ -74,7 +74,7 @@ class GeneralReader implements ReaderInterface
                 },
             ];
 
-        if (strpos($link->getUrl(), 'twitter.com')) {
+        if (strpos($link->getUrl(), 'twitter.com') || strpos($link->getUrl(), 'techcrunch.com')) {
             $options['headers']['User-Agent'] = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
         }
 
@@ -90,7 +90,7 @@ class GeneralReader implements ReaderInterface
         if (is_array($headerContentType) && count($headerContentType) > 0) {
             $contentType = current(explode(';', current($headerContentType)));
         }
-        
+        // file_put_contents(__DIR__ . '/response.html', $response->getBody());
         $link->setContent((string)$response->getBody())
             ->setContentType($contentType)
             ->setRealUrl($effectiveUrl);
